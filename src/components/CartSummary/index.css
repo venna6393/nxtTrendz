@@ -1,1 +1,7 @@
-/* Write your CSS here */
+.payment {
+  background-color: white;
+  text-align: center;
+  width: 400px;
+  height: 60vh;
+  padding: 50px;
+}

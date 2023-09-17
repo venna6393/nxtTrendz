@@ -9,12 +9,15 @@ import Cart from './components/Cart'
 import NotFound from './components/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import CartContext from './context/CartContext'
+import './components/CartSummary/index.css'
 
 import './App.css'
 
 class App extends Component {
   state = {
     cartList: [],
+    message: false,
+    text: true,
   }
 
   incrementCartItemQuantity = id => {
@@ -26,6 +29,12 @@ class App extends Component {
       return each
     })
     this.setState({cartList: updatedList})
+  }
+
+  change1 = () => {
+    this.setState(prevState => ({
+      text: !prevState.text,
+    }))
   }
 
   decrementCartItemQuantity = id => {
@@ -40,6 +49,12 @@ class App extends Component {
     })
     const updatedList1 = updatedList.filter(each => each.quantity > 0)
     this.setState({cartList: updatedList1})
+  }
+
+  clicked1 = () => {
+    this.setState(prevState => ({
+      message: !prevState.message,
+    }))
   }
 
   removeCartItem = id => {
@@ -76,17 +91,21 @@ class App extends Component {
   }
 
   render() {
-    const {cartList} = this.state
+    const {cartList, message, text} = this.state
 
     return (
       <CartContext.Provider
         value={{
           cartList,
+          message,
+          text,
           addCartItem: this.addCartItem,
           removeCartItem: this.removeCartItem,
           removeAllCartItems: this.removeAllCartItems,
           incrementCartItemQuantity: this.incrementCartItemQuantity,
           decrementCartItemQuantity: this.decrementCartItemQuantity,
+          clicked1: this.clicked1,
+          change1: this.change1,
         }}
       >
         <Switch>
